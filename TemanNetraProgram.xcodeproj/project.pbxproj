@@ -13,6 +13,8 @@
 		D328F72F230C340300511884 /* TemanNetraProgram.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D328F72D230C340300511884 /* TemanNetraProgram.xcdatamodeld */; };
 		D328F731230C340400511884 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D328F730230C340400511884 /* Assets.xcassets */; };
 		D328F734230C340400511884 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D328F732230C340400511884 /* LaunchScreen.storyboard */; };
+		D328F73E230C3D2400511884 /* OnBoardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D328F73D230C3D2400511884 /* OnBoardingViewController.swift */; };
+		D328F740230C42CF00511884 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D328F73F230C42CF00511884 /* CameraViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		D328F730230C340400511884 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D328F733230C340400511884 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D328F735230C340400511884 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D328F73D230C3D2400511884 /* OnBoardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingViewController.swift; sourceTree = "<group>"; };
+		D328F73F230C42CF00511884 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +62,8 @@
 			children = (
 				D328F726230C340300511884 /* AppDelegate.swift */,
 				D328F728230C340300511884 /* ViewController.swift */,
+				D328F73F230C42CF00511884 /* CameraViewController.swift */,
+				D328F73D230C3D2400511884 /* OnBoardingViewController.swift */,
 				D328F72A230C340300511884 /* Main.storyboard */,
 				D328F730230C340400511884 /* Assets.xcassets */,
 				D328F732230C340400511884 /* LaunchScreen.storyboard */,
@@ -139,8 +145,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				D328F72F230C340300511884 /* TemanNetraProgram.xcdatamodeld in Sources */,
+				D328F740230C42CF00511884 /* CameraViewController.swift in Sources */,
 				D328F729230C340300511884 /* ViewController.swift in Sources */,
 				D328F727230C340300511884 /* AppDelegate.swift in Sources */,
+				D328F73E230C3D2400511884 /* OnBoardingViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -296,7 +304,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.geyogabase.TemanNetraProgram;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -314,7 +322,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.geyogabase.TemanNetraProgram;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
