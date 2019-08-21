@@ -8,14 +8,15 @@
 
 import UIKit
 
-class TableViewController: UITableViewController {
+class TableViewController: UITableViewController, NoteViewDelegate {
+    
     var selectedIndex  = -1
     
     var arrNotes = [[String: String]] ()
     
     
     @IBAction func newNote()  {
-        var newDict  = ["title"  :  "TestTitle", "body" : "TestBody"]
+        var newDict  = ["title"  :  "", "body" : ""]
         
         arrNotes.insert(newDict, at: 0)
         
@@ -73,8 +74,17 @@ class TableViewController: UITableViewController {
         notesEditorVC.navigationItem.title =  arrNotes[self.selectedIndex] ["title"]
         
         notesEditorVC.strBodyText = arrNotes[self.selectedIndex] ["body"]
+        
+        notesEditorVC.delegate = self
     }
     
+    func didUpdateNoteWithTitle(newTitle: String, andBody newBody: String) {
+        self.arrNotes[self.selectedIndex] ["title"] = newTitle
+        self.arrNotes[self.selectedIndex] ["body"] = newBody
+        
+        //refresh the view
+        self.tableView.reloadData()
+    }
     /*
      
     
