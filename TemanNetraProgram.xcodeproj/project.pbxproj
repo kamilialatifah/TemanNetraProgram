@@ -17,6 +17,7 @@
 		D328F734230C340400511884 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D328F732230C340400511884 /* LaunchScreen.storyboard */; };
 		D328F73E230C3D2400511884 /* OnBoardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D328F73D230C3D2400511884 /* OnBoardingViewController.swift */; };
 		D328F740230C42CF00511884 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D328F73F230C42CF00511884 /* CameraViewController.swift */; };
+		D3540F3B230EB770009A7439 /* Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3540F3A230EB770009A7439 /* Preview.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		D328F735230C340400511884 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D328F73D230C3D2400511884 /* OnBoardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingViewController.swift; sourceTree = "<group>"; };
 		D328F73F230C42CF00511884 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
+		D3540F3A230EB770009A7439 /* Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preview.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +71,7 @@
 				D328F73F230C42CF00511884 /* CameraViewController.swift */,
 				D328F73D230C3D2400511884 /* OnBoardingViewController.swift */,
 				D328F72A230C340300511884 /* Main.storyboard */,
+				D3540F3A230EB770009A7439 /* Preview.swift */,
 				083215B5230D792E003EBF2A /* TableViewController.swift */,
 				083215B7230D8B36003EBF2A /* NotesViewController.swift */,
 				D328F730230C340400511884 /* Assets.xcassets */,
@@ -152,6 +155,7 @@
 			files = (
 				D328F72F230C340300511884 /* TemanNetraProgram.xcdatamodeld in Sources */,
 				083215B6230D792E003EBF2A /* TableViewController.swift in Sources */,
+				D3540F3B230EB770009A7439 /* Preview.swift in Sources */,
 				D328F740230C42CF00511884 /* CameraViewController.swift in Sources */,
 				083215B8230D8B36003EBF2A /* NotesViewController.swift in Sources */,
 				D328F729230C340300511884 /* ViewController.swift in Sources */,
@@ -303,7 +307,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5538968945;
+				DEVELOPMENT_TEAM = F63VRNN393;
 				INFOPLIST_FILE = TemanNetraProgram/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -322,7 +326,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5538968945;
+				DEVELOPMENT_TEAM = F63VRNN393;
 				INFOPLIST_FILE = TemanNetraProgram/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (

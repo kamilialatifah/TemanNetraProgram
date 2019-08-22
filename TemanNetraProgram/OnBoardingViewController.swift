@@ -20,8 +20,9 @@ class OnBoardingViewController: UIPageViewController, UIPageViewControllerDelega
         let welcomePage1 = storyBoard.instantiateViewController(withIdentifier: "OnBoardOne")
         let welcomePage2 = storyBoard.instantiateViewController(withIdentifier: "OnBoardTwo")
         let welcomePage3 = storyBoard.instantiateViewController(withIdentifier: "OnBoardThree")
+        let welcomePage4 = storyBoard.instantiateViewController(withIdentifier: "OnBoardFour")
         
-        return[welcomePage1, welcomePage2, welcomePage3]
+        return[welcomePage1, welcomePage2, welcomePage3, welcomePage4]
     }()
     
     // membuat variable untuk class PageControl
@@ -34,12 +35,15 @@ class OnBoardingViewController: UIPageViewController, UIPageViewControllerDelega
         pageControl.currentPage = 0
         pageControl.tintColor = UIColor.white
         pageControl.pageIndicatorTintColor = UIColor.gray
-        pageControl.isUserInteractionEnabled = false
+        pageControl.isUserInteractionEnabled = true
         pageControl.currentPageIndicatorTintColor = UIColor.blue
         self.view.addSubview(pageControl)
     }
     
+   
+    
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
+        
         
         // membuat index view controller saat ini
         guard let vcIndex = viewControllerList.firstIndex(of: viewController) else { return nil }
@@ -94,6 +98,7 @@ class OnBoardingViewController: UIPageViewController, UIPageViewControllerDelega
         
         // ambil index dari viewControllers
         let pageContentViewController = pageViewController.viewControllers![0]
+        self.pageControl.currentPage = viewControllerList.firstIndex(of: pageContentViewController)!
         
 //        // ketika index bernilai terakhir, maka transisi opacity terjadi
 //        if pageContentViewController == viewControllerList.last {
@@ -114,8 +119,6 @@ class OnBoardingViewController: UIPageViewController, UIPageViewControllerDelega
 //                self.pageControl.alpha = 1
 //            }, completion: nil)
 //        }
-        
-        self.pageControl.currentPage = viewControllerList.firstIndex(of: pageContentViewController)!
         
     }
     
