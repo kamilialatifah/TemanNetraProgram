@@ -170,7 +170,7 @@ extension CameraViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
    //func untuk segue swipe
 @objc func swipeAction(swipe: UISwipeGestureRecognizer) {
             
-    performSegue(withIdentifier: "gotoarchive", sender: self)
+    performSegue(withIdentifier: "goRight", sender: self)
             
         }
     

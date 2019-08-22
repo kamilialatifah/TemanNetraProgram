@@ -94,7 +94,8 @@ class TableViewController: UITableViewController, NoteViewDelegate {
     
     @objc func swipeAction2(swipe: UISwipeGestureRecognizer) {
         
-        performSegue(withIdentifier: "balikkekamera", sender: self)
+//        performSegue(withIdentifier: "goLeft", sender: self)
+        self.dismiss(animated: false, completion: nil)
         
     }
     /*

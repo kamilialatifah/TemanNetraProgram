@@ -45,22 +45,6 @@
             </objects>
             <point key="canvasLocation" x="-33" y="21"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="3C8-6T-jaR">
-            <objects>
-                <viewController id="hdh-ML-RZM" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="ZMb-RS-ae0">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="eDT-Dq-cr5"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" systemItem="bookmarks" id="UVe-Sk-oSu"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="D3z-Rq-dlC" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1557" y="346"/>
-        </scene>
         <!--Camera View Controller-->
         <scene sceneID="mkf-lH-rO7">
             <objects>
@@ -80,7 +64,7 @@
                     <tabBarItem key="tabBarItem" systemItem="search" id="OQe-mL-lqT"/>
                     <connections>
                         <outlet property="imageView" destination="Pfn-Tr-aJW" id="Xjv-id-l5d"/>
-                        <segue destination="qUC-ow-qk3" kind="modal" identifier="gotoarchive" animates="NO" modalTransitionStyle="flipHorizontal" id="cMP-ia-klL"/>
+                        <segue destination="qUC-ow-qk3" kind="show" identifier="goRight" animates="NO" id="cMP-ia-klL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2HO-Ky-6mr" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -111,6 +95,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Arsip" id="bSk-N0-L8M">
+                        <barButtonItem key="leftBarButtonItem" title="Camera" id="WBd-62-tRv"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="MuN-rq-38F">
                             <connections>
                                 <action selector="newNote" destination="6lT-EU-vsZ" id="nJj-Rv-Ylu"/>
@@ -123,7 +108,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ujn-wQ-9we" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3000.0000000000005" y="-300"/>
+            <point key="canvasLocation" x="3336" y="-1154"/>
         </scene>
         <!--Title-->
         <scene sceneID="qa6-v6-DQb">
@@ -165,24 +150,6 @@
             </objects>
             <point key="canvasLocation" x="3979" y="-292"/>
         </scene>
-        <!--Tab Bar Controller-->
-        <scene sceneID="i10-MJ-yCk">
-            <objects>
-                <tabBarController id="dnZ-Qn-AE4" sceneMemberID="viewController">
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="3jE-kP-Ect">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </tabBar>
-                    <connections>
-                        <segue destination="b3q-yk-uX7" kind="relationship" relationship="viewControllers" id="rF2-fv-j7V"/>
-                        <segue destination="hdh-ML-RZM" kind="relationship" relationship="viewControllers" id="SsJ-5n-h0T"/>
-                    </connections>
-                </tabBarController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="y2B-TN-0Wz" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="749" y="21"/>
-        </scene>
         <!--View Controller-->
         <scene sceneID="F7Q-w1-Uc8">
             <objects>
@@ -206,9 +173,6 @@
                                         <integer key="value" value="10"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <segue destination="dnZ-Qn-AE4" kind="show" id="GV1-9H-Nd4"/>
-                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -268,15 +232,11 @@
                     <nil name="viewControllers"/>
                     <connections>
                         <segue destination="6lT-EU-vsZ" kind="relationship" relationship="rootViewController" id="RHB-4i-dq2"/>
-                        <segue destination="b3q-yk-uX7" kind="show" identifier="balikkekamera" id="np2-OF-QKS"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DvV-O7-kQK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2951" y="-1091"/>
+            <point key="canvasLocation" x="2461" y="-1146"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="np2-OF-QKS"/>
-    </inferredMetricsTieBreakers>
 </document>
