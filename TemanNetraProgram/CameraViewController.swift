@@ -43,6 +43,10 @@ class CameraViewController: UIViewController {
         leftSwipe.direction = UISwipeGestureRecognizer.Direction.left
         
         self.view.addGestureRecognizer(leftSwipe)
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(doubleTapped))
+        tap.numberOfTapsRequired  = 2
+        view.addGestureRecognizer(tap)
     }
     
         override func becomeFirstResponder() -> Bool {
@@ -358,7 +362,20 @@ extension CameraViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
             
         }
     
+    @objc func doubleTapped() {
+        
+        let alert = UIAlertController(title: "Judul Catatan", message: "Berikan judul untuk menyimpan catatan ini ke dalam Arsip", preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "Simpan", style: .default, handler: { action in
+            if let catatan  = alert.textFields?.first?.text {
+                print("ok")
+            }
+        }))
+        self.present(alert, animated: true)
+    }
+    
     
 }
+
+
 
 
