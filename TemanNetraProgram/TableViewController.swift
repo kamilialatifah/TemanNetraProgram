@@ -10,9 +10,13 @@ import UIKit
 
 class TableViewController: UITableViewController, NoteViewDelegate {
     
+    
+    
     var selectedIndex  = -1
     
     var arrNotes = [[String: String]] ()
+    
+    let searchController = UISearchController(searchResultsController: nil)
     
     
     @IBAction func newNote()  {
@@ -38,6 +42,14 @@ class TableViewController: UITableViewController, NoteViewDelegate {
         rightSwipe.direction = UISwipeGestureRecognizer.Direction.right
         
         self.view.addGestureRecognizer(rightSwipe)
+        
+        //parameter untuk search controller
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder  = "Cari catatan"
+        navigationItem.searchController  = searchController
+        definesPresentationContext = true
+        
     }
     
     override func  didReceiveMemoryWarning() {
@@ -110,4 +122,10 @@ class TableViewController: UITableViewController, NoteViewDelegate {
     }
     */
 
+}
+
+extension TableViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        //that's we are going to do
+    }
 }
