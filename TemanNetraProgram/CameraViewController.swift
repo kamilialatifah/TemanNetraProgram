@@ -392,6 +392,11 @@ extension CameraViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
                 print("ok")
             }
         }))
+        alert.addTextField(configurationHandler: { textField in
+            textField.placeholder = "Buat judul catatanmu"
+        })
+        
+        alert.addAction(UIAlertAction(title: "Batal", style:  .cancel, handler: nil))
         self.present(alert, animated: true)
     }
     
