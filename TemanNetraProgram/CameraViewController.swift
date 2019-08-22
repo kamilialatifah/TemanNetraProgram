@@ -7,19 +7,21 @@
 //
 
 import UIKit
-import Vision
 import AVFoundation
+import AVKit
+import Vision
 
 class CameraViewController: UIViewController {
 
+    var counter = 0
     @IBOutlet weak var imageView: UIImageView!
+    let synthesizer = AVSpeechSynthesizer()
     var session = AVCaptureSession()
     var requests = [VNRequest]()
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+    var spokenText: String = ""
+    var titikTengahDeviceX: Float = 0
+    var titikTengahDeviceY: Float = 0
+    var posisiSudahPas = false
     
     override func viewDidLayoutSubviews() {
         imageView.layer.sublayers?[0].frame = imageView.bounds
@@ -29,7 +31,10 @@ class CameraViewController: UIViewController {
         super.viewDidLoad()
         
         startLiveVideo()
-        startTextDetection()
+        startTextRecognition()
+        titikTengahDeviceX = Float(imageView.frame.width/2)
+        titikTengahDeviceY = Float(imageView.frame.height/2)
+        //startTextDetection()
         // Do any additional setup after loading the view.
         
         //func segue swipe
@@ -40,70 +45,229 @@ class CameraViewController: UIViewController {
         self.view.addGestureRecognizer(leftSwipe)
     }
     
-    func startLiveVideo() {
-        //1
-        session.sessionPreset = AVCaptureSession.Preset.photo
-        let captureDevice = AVCaptureDevice.default(for: AVMediaType.video)
-        
-        //2
-        let deviceInput = try! AVCaptureDeviceInput(device: captureDevice!)
-        let deviceOutput = AVCaptureVideoDataOutput()
-        deviceOutput.videoSettings = [kCVPixelBufferPixelFormatTypeKey as String: Int(kCVPixelFormatType_32BGRA)]
-        deviceOutput.setSampleBufferDelegate(self, queue: DispatchQueue.global(qos: DispatchQoS.QoSClass.default))
-        session.addInput(deviceInput)
-        session.addOutput(deviceOutput)
-        
-        //3
-        let imageLayer = AVCaptureVideoPreviewLayer(session: session)
-        imageLayer.frame = imageView.bounds
-        imageView.layer.addSublayer(imageLayer)
-        
-        session.startRunning()
-    }
-    
-    func startTextDetection() {
-        let textRequest = VNDetectTextRectanglesRequest(completionHandler: self.detectTextHandler)
-        textRequest.reportCharacterBoxes = true
-        self.requests = [textRequest]
-    }
-    
-    func detectTextHandler(request: VNRequest, error: Error?) {
-        guard let observations = request.results else {
-            print("no result")
-            return
+        override func becomeFirstResponder() -> Bool {
+            return true
         }
         
-        let result = observations.map({$0 as? VNTextObservation})
+        override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
+            if motion == .motionShake {
+    //            let appDelegate = UIApplication.shared.delegate as? AppDelegate
+    //
+    //            guard let managedContext = appDelegate?.persistentContainer.viewContext else { return }
+    //
+    //            let archive = Archive(context: managedContext)
+    //
+    //            archive.title = "test"
+    //            archive.text = self.spokenText
+    //
+    //            do {
+    //                try managedContext.save()
+    //                print("berhasil menyimpan")
+    //            } catch  {
+    //                print("Gagal menyimpan")
+    //            }
+                synthesizer.stopSpeaking(at: .immediate)
+            }
+        }
         
-        DispatchQueue.main.async() {
-            self.imageView.layer.sublayers?.removeSubrange(1...)
-            for region in result {
-                guard let rg = region else {
-                    continue
-                }
+        func startLiveVideo() {
+            session.sessionPreset = AVCaptureSession.Preset.photo
+            let captureDevice = AVCaptureDevice.default(for: AVMediaType.video)
+            let deviceInput = try! AVCaptureDeviceInput(device: captureDevice!)
+            let deviceOutput = AVCaptureVideoDataOutput()
+            deviceOutput.videoSettings = [kCVPixelBufferPixelFormatTypeKey as String: Int(kCVPixelFormatType_32BGRA)]
+            deviceOutput.setSampleBufferDelegate(self as AVCaptureVideoDataOutputSampleBufferDelegate, queue: DispatchQueue.global(qos: DispatchQoS.QoSClass.default))
+            session.addInput(deviceInput)
+            session.addOutput(deviceOutput)
+            
+            let imageLayer = AVCaptureVideoPreviewLayer(session: session)
+            imageLayer.frame = imageView.bounds
+            imageView.layer.addSublayer(imageLayer)
+            
+            session.startRunning()
+        }
+        
+        func startTextRecognition(){
+            let textRequest = VNRecognizeTextRequest(completionHandler: self.recognizeTextHandler)
+            textRequest.usesLanguageCorrection = false
+            //textRequest.regionOfInterest = CGRect(x: 0.25, y: 0.25, width: 0.5, height: 0.5)
+            //textRequest.minimumTextHeight = 0.0625
+            self.requests = [textRequest]
+        }
+        
+        func recognizeTextHandler(request: VNRequest, error: Error?){
+            if(synthesizer.isSpeaking == false)
+            {
+                guard let observations = request.results as? [VNRecognizedTextObservation] else {print("no result"); return}
                 
-                self.highlightWord(box: rg)
-                
-                if let boxes = region?.characterBoxes {
-                    for characterBox in boxes {
-                        self.highlightLetters(box: characterBox)
+                DispatchQueue.main.async()
+                {
+                    var avgConfidence: Float = 0
+                    var totalConfidence: Float = 0
+                    var observationCounter: Float = 0
+                    var titikTengahTextX: Float = 0
+                    var titikTengahTextY: Float = 0
+                    var koordinatTextTerdekatX: Float = 9999
+                    var koordinatTextTerdekatY: Float = 9999
+                    var recognizedText: String = ""
+                    var atas = false
+                    var bawah = false
+                    var kiri = false
+                    var kanan = false
+                    self.imageView.layer.sublayers?.removeSubrange(1...)
+                    for observation in observations
+                    {
+                        let penampungTitikTengahText = self.highlightWord(char: observation)
+                        titikTengahTextX = Float(penampungTitikTengahText.x)
+                        titikTengahTextY = Float(penampungTitikTengahText.y)
+    //                    print("X :", titikTengahTextX)
+    //                    print("Y :", titikTengahTextY)
+                        if(titikTengahTextX < self.titikTengahDeviceX)
+                        {
+                            koordinatTextTerdekatX = self.titikTengahDeviceX - titikTengahTextX
+                            kiri = true
+                            kanan = false
+                            print("perlu ke kiri")
+                        }
+                        else if(titikTengahTextX - self.titikTengahDeviceX < koordinatTextTerdekatX)
+                        {
+                            koordinatTextTerdekatX = titikTengahTextX - self.titikTengahDeviceX
+                            kiri = false
+                            kanan = true
+                            print("perlu ke kanan")
+                        }
+                        
+                        if(titikTengahTextY < self.titikTengahDeviceY)
+                        {
+                            koordinatTextTerdekatY = self.titikTengahDeviceY - titikTengahTextY
+                            atas = true
+                            bawah = false
+                            print("perlu ke atas")
+                        }
+                        else if(titikTengahTextY - self.titikTengahDeviceY < koordinatTextTerdekatY)
+                        {
+                            koordinatTextTerdekatY = titikTengahTextY - self.titikTengahDeviceY
+                            atas = false
+                            bawah = true
+                            print("perlu ke atas")
+                        }
+                        guard let candidate = observation.topCandidates(1).first else { continue }
+                        totalConfidence += candidate.confidence
+                        observationCounter += 1
+                        recognizedText += candidate.string + " "
+                    }
+                    if(koordinatTextTerdekatX > koordinatTextTerdekatY)
+                    {
+                        if(kiri == true)
+                        {
+                            let speechUtterance = AVSpeechUtterance(string: "Kiri")
+                            speechUtterance.voice = AVSpeechSynthesisVoice(language: "id")
+                            self.synthesizer.speak(speechUtterance)
+                        }
+                        else if(kanan == true)
+                        {
+                            let speechUtterance = AVSpeechUtterance(string: "Kanan")
+                            speechUtterance.voice = AVSpeechSynthesisVoice(language: "id")
+                            self.synthesizer.speak(speechUtterance)
+                        }
+                    }
+                    else
+                    {
+                        if(atas == true)
+                        {
+                            let speechUtterance = AVSpeechUtterance(string: "Atas")
+                            speechUtterance.voice = AVSpeechSynthesisVoice(language: "id")
+                            self.synthesizer.speak(speechUtterance)
+                        }
+                        else if(bawah == true)
+                        {
+                            let speechUtterance = AVSpeechUtterance(string: "Bawah")
+                            speechUtterance.voice = AVSpeechSynthesisVoice(language: "id")
+                            self.synthesizer.speak(speechUtterance)
+                        }
+                    }
+                    if(koordinatTextTerdekatX < 50 && koordinatTextTerdekatY < 50)
+                    {
+                        self.synthesizer.stopSpeaking(at: .immediate)
+                        self.posisiSudahPas = true
+                        print("Posisi sudah pas")
+                    }
+                    else
+                    {
+                        self.posisiSudahPas = false
+                        print("Belum pas")
+                    }
+                    if(self.posisiSudahPas == true)
+                    {
+                        if(self.spokenText != recognizedText && recognizedText != "")
+                        {
+                            self.spokenText = recognizedText
+                            if(self.counter >= 7)
+                            {
+                                self.counter -= 3
+                            }
+                            else
+                            {
+                                self.counter = 0
+                            }
+                        }
+                        avgConfidence = totalConfidence/observationCounter
+                        if(self.spokenText == recognizedText)
+                        {
+                            self.counter += 5
+                            print(self.spokenText, recognizedText, self.counter)
+                        }
+                        if(avgConfidence >= 0.5 && self.counter > 30)
+                        {
+                            let speechUtterance = AVSpeechUtterance(string: "\(self.spokenText)")
+                            speechUtterance.voice = AVSpeechSynthesisVoice(language: "id")
+                            self.synthesizer.speak(speechUtterance)
+                            
+                            self.counter = 0
+                            print(recognizedText,avgConfidence)
+                        }
                     }
                 }
             }
         }
-    }
-    
-    func highlightWord(box: VNTextObservation) {
-        guard let boxes = box.characterBoxes else {
-            return
-        }
         
-        var maxX: CGFloat = 9999.0
-        var minX: CGFloat = 0.0
-        var maxY: CGFloat = 9999.0
-        var minY: CGFloat = 0.0
-        
-        for char in boxes {
+    //    func startTextDetection() {
+    //        let textRequest = VNDetectTextRectanglesRequest(completionHandler: self.detectTextHandler)
+    //        textRequest.reportCharacterBoxes = true
+    //        self.requests = [textRequest]
+    //    }
+    //
+    //    func detectTextHandler(request: VNRequest, error: Error?) {
+    //        guard let observations = request.results else {
+    //            print("no result")
+    //            return
+    //        }
+    //        let result = observations.map({$0 as? VNTextObservation})
+    //
+    //        DispatchQueue.main.async() {
+    //            self.imageView.layer.sublayers?.removeSubrange(1...)
+    //            for region in result {
+    //                guard let rg = region else {
+    //                    continue
+    //                }
+    //                self.highlightWord(box: rg)
+    //
+    //                if let boxes = region?.characterBoxes {
+    //                    for characterBox in boxes {
+    //                        self.highlightLetters(box: characterBox)
+    //                    }
+    //                }
+    //            }
+    //        }
+    //    }
+    //
+        func highlightWord(char: VNRecognizedTextObservation) -> CGPoint {
+            
+            var maxX: CGFloat = 999.0
+            var minX: CGFloat = 0.0
+            var maxY: CGFloat = 999.0
+            var minY: CGFloat = 0.0
+
             if char.bottomLeft.x < maxX {
                 maxX = char.bottomLeft.x
             }
@@ -116,35 +280,55 @@ class CameraViewController: UIViewController {
             if char.topRight.y > minY {
                 minY = char.topRight.y
             }
+            
+            let myWidth = imageView.frame.size.width
+            let myHeight = imageView.frame.size.height
+            let xCord = maxX * myWidth
+            let yCord = (1 - minY) * myHeight
+            let midX = (xCord + minX * myWidth) / 2
+            let midY = (yCord + (1 - maxY) * myHeight) / 2
+            return CGPoint(x: midX, y: midY)
         }
+
+//        func highlightLetters(box: VNRectangleObservation) {
+//            let xCord = box.topLeft.x * imageView.frame.size.width
+//            let yCord = (1 - box.topLeft.y) * imageView.frame.size.height
+//            let width = (box.topRight.x - box.bottomLeft.x) * imageView.frame.size.width
+//            let height = (box.topLeft.y - box.bottomLeft.y) * imageView.frame.size.height
+//
+//            let outline = CALayer()
+//            outline.frame = CGRect(x: xCord, y: yCord, width: width, height: height)
+//            outline.borderWidth = 1.0
+//            outline.borderColor = UIColor.blue.cgColor
+//
+//            imageView.layer.addSublayer(outline)
+//        }
         
-        let xCord = maxX * imageView.frame.size.width
-        let yCord = (1 - minY) * imageView.frame.size.height
-        let width = (minX - maxX) * imageView.frame.size.width
-        let height = (minY - maxY) * imageView.frame.size.height
-        
-        let outline = CALayer()
-        outline.frame = CGRect(x: xCord, y: yCord, width: width, height: height)
-        outline.borderWidth = 2.0
-        outline.borderColor = UIColor.red.cgColor
-        
-        imageView.layer.addSublayer(outline)
+//        func fetchData()
+//        {
+//            let appDelegate = UIApplication.shared.delegate as? AppDelegate
+//            guard let managedContext = appDelegate?.persistentContainer.viewContext else { return  }
+//
+//
+//            var archives = [Archive]()
+//
+//            do {
+//                archives = try managedContext.fetch(Archive.fetchRequest())
+//
+//                for archive in archives
+//                {
+//                    let text = archive.text
+//
+//                    self.spokenText! = text!
+//                }
+//            } catch  {
+//                print("Gagal memanggil")
+//            }
+//
+//        }
+//
+//    //}
     }
-    
-    func highlightLetters(box: VNRectangleObservation) {
-        let xCord = box.topLeft.x * imageView.frame.size.width
-        let yCord = (1 - box.topLeft.y) * imageView.frame.size.height
-        let width = (box.topRight.x - box.bottomLeft.x) * imageView.frame.size.width
-        let height = (box.topLeft.y - box.bottomLeft.y) * imageView.frame.size.height
-        
-        let outline = CALayer()
-        outline.frame = CGRect(x: xCord, y: yCord, width: width, height: height)
-        outline.borderWidth = 1.0
-        outline.borderColor = UIColor.blue.cgColor
-        
-        imageView.layer.addSublayer(outline)
-    }
-}
 
 extension CameraViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
@@ -158,7 +342,7 @@ extension CameraViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
             requestOptions = [.cameraIntrinsics:camData]
         }
         
-        let imageRequestHandler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: .right, options: requestOptions)
+        let imageRequestHandler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: CGImagePropertyOrientation(rawValue: 6)!, options: requestOptions)
         
         do {
             try imageRequestHandler.perform(self.requests)
