@@ -31,7 +31,7 @@ class CameraViewController: UIViewController {
         super.viewDidLoad()
         
         startLiveVideo()
-        startTextRecognition()
+      //  startTextRecognition()
         titikTengahDeviceX = Float(imageView.frame.width/2)
         titikTengahDeviceY = Float(imageView.frame.height/2)
         //startTextDetection()
@@ -75,30 +75,51 @@ class CameraViewController: UIViewController {
         }
         
         func startLiveVideo() {
-            session.sessionPreset = AVCaptureSession.Preset.photo
-            let captureDevice = AVCaptureDevice.default(for: AVMediaType.video)
-            let deviceInput = try! AVCaptureDeviceInput(device: captureDevice!)
-            let deviceOutput = AVCaptureVideoDataOutput()
-            deviceOutput.videoSettings = [kCVPixelBufferPixelFormatTypeKey as String: Int(kCVPixelFormatType_32BGRA)]
-            deviceOutput.setSampleBufferDelegate(self as AVCaptureVideoDataOutputSampleBufferDelegate, queue: DispatchQueue.global(qos: DispatchQoS.QoSClass.default))
-            session.addInput(deviceInput)
-            session.addOutput(deviceOutput)
+            cameraView.session = session
             
-            let imageLayer = AVCaptureVideoPreviewLayer(session: session)
-            imageLayer.frame = imageView.bounds
-            imageView.layer.addSublayer(imageLayer)
-            
+            let cameraDevices = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInWideAngleCamera], mediaType: AVMediaType.video, position: .back)
+            var cameraDevice: AVCaptureDevice?
+            for device in cameraDevices.devices {
+                if device.position == .back {
+                    cameraDevice = device
+                    break
+                }
+            }
+            do {
+                let captureDeviceInput = try AVCaptureDeviceInput(device: cameraDevice!)
+                if session.canAddInput(captureDeviceInput) {
+                    session.addInput(captureDeviceInput)
+                }
+            }
+            catch {
+                print("Error occured \(error)")
+                return
+            }
+            session.sessionPreset = .high
+            let videoDataOutput = AVCaptureVideoDataOutput()
+            videoDataOutput.setSampleBufferDelegate(self, queue: DispatchQueue(label: "Buffer Queue", qos: .userInteractive, attributes: .concurrent, autoreleaseFrequency: .inherit, target: nil))
+            if session.canAddOutput(videoDataOutput) {
+                session.addOutput(videoDataOutput)
+            }
+            cameraView.videoPreviewLayer.videoGravity = .resize
             session.startRunning()
         }
+    
+    private var cameraView: CameraView{
         
-        func startTextRecognition(){
+        return  imageView as! CameraView
+    }
+        
+        /*func startTextRecognition(){
             let textRequest = VNRecognizeTextRequest(completionHandler: self.recognizeTextHandler)
             textRequest.usesLanguageCorrection = false
             //textRequest.regionOfInterest = CGRect(x: 0.25, y: 0.25, width: 0.5, height: 0.5)
             //textRequest.minimumTextHeight = 0.0625
             self.requests = [textRequest]
+            
         }
-        
+        */
+        /*
         func recognizeTextHandler(request: VNRequest, error: Error?){
             if(synthesizer.isSpeaking == false)
             {
@@ -234,6 +255,7 @@ class CameraViewController: UIViewController {
                 }
             }
         }
+    */
         
     //    func startTextDetection() {
     //        let textRequest = VNDetectTextRectanglesRequest(completionHandler: self.detectTextHandler)
@@ -265,7 +287,7 @@ class CameraViewController: UIViewController {
     //        }
     //    }
     //
-        func highlightWord(char: VNRecognizedTextObservation) -> CGPoint {
+    /*    func highlightWord(char: VNRecognizedTextObservation) -> CGPoint {
             
             var maxX: CGFloat = 999.0
             var minX: CGFloat = 0.0
@@ -292,7 +314,7 @@ class CameraViewController: UIViewController {
             let midX = (xCord + minX * myWidth) / 2
             let midY = (yCord + (1 - maxY) * myHeight) / 2
             return CGPoint(x: midX, y: midY)
-        }
+        }*/
 
 //        func highlightLetters(box: VNRectangleObservation) {
 //            let xCord = box.topLeft.x * imageView.frame.size.width
