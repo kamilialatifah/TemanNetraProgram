@@ -31,6 +31,13 @@ class CameraViewController: UIViewController {
         startLiveVideo()
         startTextDetection()
         // Do any additional setup after loading the view.
+        
+        //func segue swipe
+        let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(swipeAction(swipe:)))
+        
+        leftSwipe.direction = UISwipeGestureRecognizer.Direction.left
+        
+        self.view.addGestureRecognizer(leftSwipe)
     }
     
     func startLiveVideo() {
@@ -159,5 +166,15 @@ extension CameraViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
             print(error)
         }
     }
+    
+   //func untuk segue swipe
+@objc func swipeAction(swipe: UISwipeGestureRecognizer) {
+            
+    performSegue(withIdentifier: "gotoarchive", sender: self)
+            
+        }
+    
+    
 }
+
 

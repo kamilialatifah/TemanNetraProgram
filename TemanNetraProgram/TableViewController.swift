@@ -32,6 +32,12 @@ class TableViewController: UITableViewController, NoteViewDelegate {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(swipeAction2(swipe:)))
+        
+        rightSwipe.direction = UISwipeGestureRecognizer.Direction.right
+        
+        self.view.addGestureRecognizer(rightSwipe)
     }
     
     override func  didReceiveMemoryWarning() {
@@ -84,6 +90,12 @@ class TableViewController: UITableViewController, NoteViewDelegate {
         
         //refresh the view
         self.tableView.reloadData()
+    }
+    
+    @objc func swipeAction2(swipe: UISwipeGestureRecognizer) {
+        
+        performSegue(withIdentifier: "balikkekamera", sender: self)
+        
     }
     /*
      

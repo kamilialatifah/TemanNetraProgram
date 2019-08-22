@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="qUC-ow-qk3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="b3q-yk-uX7">
     <device id="retina6_1" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -80,6 +80,7 @@
                     <tabBarItem key="tabBarItem" systemItem="search" id="OQe-mL-lqT"/>
                     <connections>
                         <outlet property="imageView" destination="Pfn-Tr-aJW" id="Xjv-id-l5d"/>
+                        <segue destination="qUC-ow-qk3" kind="modal" identifier="gotoarchive" animates="NO" modalTransitionStyle="flipHorizontal" id="cMP-ia-klL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2HO-Ky-6mr" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -267,11 +268,15 @@
                     <nil name="viewControllers"/>
                     <connections>
                         <segue destination="6lT-EU-vsZ" kind="relationship" relationship="rootViewController" id="RHB-4i-dq2"/>
+                        <segue destination="b3q-yk-uX7" kind="show" identifier="balikkekamera" id="np2-OF-QKS"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DvV-O7-kQK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3001" y="-1044"/>
+            <point key="canvasLocation" x="2951" y="-1091"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="np2-OF-QKS"/>
+    </inferredMetricsTieBreakers>
 </document>
