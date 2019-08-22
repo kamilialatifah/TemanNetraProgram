@@ -72,15 +72,15 @@
                                 <rect key="frame" x="0.0" y="106" width="414" height="756"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qrc-Gl-0Xr">
-                                <rect key="frame" x="20" y="44" width="68" height="54"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y2d-M5-Q7c">
+                                <rect key="frame" x="364" y="50" width="30" height="48"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
+                                <state key="normal" image="Arsip"/>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y2d-M5-Q7c">
-                                <rect key="frame" x="326" y="44" width="68" height="54"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qrc-Gl-0Xr">
+                                <rect key="frame" x="20" y="50" width="46" height="48"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
+                                <state key="normal" image="Panduan"/>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -184,7 +184,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Oval" translatesAutoresizingMaskIntoConstraints="NO" id="kAQ-jy-8G8">
-                                <rect key="frame" x="-170" y="656" width="344" height="344"/>
+                                <rect key="frame" x="-170" y="984" width="16" height="16"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Oval" translatesAutoresizingMaskIntoConstraints="NO" id="X9I-co-9jk">
                                 <rect key="frame" x="248" y="-110" width="330" height="336"/>
@@ -275,7 +275,6 @@
         <!--View Controller-->
         <scene sceneID="bEX-Nt-RMf">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="C3d-JO-LCp" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="OnBoardOne" id="CRQ-9A-ypg" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="H2M-gA-7Vm">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -301,6 +300,7 @@
                         <viewLayoutGuide key="safeArea" id="kzR-Fr-Unh"/>
                     </view>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="C3d-JO-LCp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-664" y="21"/>
         </scene>
@@ -324,7 +324,9 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Arsip" width="30" height="46"/>
         <image name="Oval" width="344" height="344"/>
+        <image name="Panduan" width="46" height="48"/>
         <image name="Warning" width="350" height="283"/>
         <image name="iphoneChecklist" width="220" height="306"/>
         <image name="iphoneHand" width="314" height="417"/>
