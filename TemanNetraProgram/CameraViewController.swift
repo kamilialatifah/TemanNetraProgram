@@ -37,16 +37,11 @@ class CameraViewController: UIViewController {
         //startTextDetection()
         // Do any additional setup after loading the view.
         
-        //func segue swipe
-        let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(swipeAction(swipe:)))
         
-        leftSwipe.direction = UISwipeGestureRecognizer.Direction.left
-        
-        self.view.addGestureRecognizer(leftSwipe)
-        
+        //double  tap
         let tap = UITapGestureRecognizer(target: self, action: #selector(doubleTapped))
         tap.numberOfTapsRequired  = 2
-        view.addGestureRecognizer(tap)
+        self.imageView.addGestureRecognizer(tap)
     }
     
         override func becomeFirstResponder() -> Bool {
@@ -378,11 +373,7 @@ extension CameraViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
     }
     
    //func untuk segue swipe
-@objc func swipeAction(swipe: UISwipeGestureRecognizer) {
-            
-    performSegue(withIdentifier: "goRight", sender: self)
-            
-        }
+
     
     @objc func doubleTapped() {
         

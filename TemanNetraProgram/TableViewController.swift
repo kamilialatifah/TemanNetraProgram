@@ -37,11 +37,6 @@ class TableViewController: UITableViewController, NoteViewDelegate {
 
         // Do any additional setup after loading the view.
         
-        let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(swipeAction2(swipe:)))
-        
-        rightSwipe.direction = UISwipeGestureRecognizer.Direction.right
-        
-        self.view.addGestureRecognizer(rightSwipe)
         
         //parameter untuk search controller
         searchController.searchResultsUpdater = self
@@ -104,12 +99,7 @@ class TableViewController: UITableViewController, NoteViewDelegate {
         self.tableView.reloadData()
     }
     
-    @objc func swipeAction2(swipe: UISwipeGestureRecognizer) {
-        
-//        performSegue(withIdentifier: "goLeft", sender: self)
-        self.dismiss(animated: false, completion: nil)
-        
-    }
+    
     /*
      
     
