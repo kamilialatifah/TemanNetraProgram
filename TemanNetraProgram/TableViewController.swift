@@ -39,11 +39,7 @@ class TableViewController: UITableViewController, NoteViewDelegate {
         
         
         //parameter untuk search controller
-        searchController.searchResultsUpdater = self
-        searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder  = "Cari catatan"
-        navigationItem.searchController  = searchController
-        definesPresentationContext = true
+        
         
     }
     
@@ -114,8 +110,8 @@ class TableViewController: UITableViewController, NoteViewDelegate {
 
 }
 
-extension TableViewController: UISearchResultsUpdating {
-    func updateSearchResults(for searchController: UISearchController) {
-        //that's we are going to do
-    }
-}
+//extension TableViewController: UISearchResultsUpdating {
+//    func updateSearchResults(for searchController: UISearchController) {
+//        //that's we are going to do
+//    }
+//}

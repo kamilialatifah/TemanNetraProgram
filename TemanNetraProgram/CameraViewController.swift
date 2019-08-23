@@ -69,6 +69,14 @@ class CameraViewController: UIViewController {
             }
         }
     
+    //segue simpan  text ke notes
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destination = segue.destination as? NotesViewController {
+            
+        }
+    }
+    
     @IBAction func buttonAlertSave(_ sender: Any) {
         
         let alert = UIAlertController(title: "Judul Catatan", message: "Berikan judul untuk menyimpan catatan ini ke dalam Arsip", preferredStyle: UIAlertController.Style.alert)
@@ -397,12 +405,12 @@ extension CameraViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
     
    //func untuk segue swipe
 
-//    
+//
 //    @objc func doubleTapped() {
-//        
-//       
+//
+//
 //    }
-//    
+//
     
 }
 
