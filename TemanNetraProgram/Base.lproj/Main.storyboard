@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14810.11" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BRb-NL-Miq">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BRb-NL-Miq">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14766.13"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -64,48 +65,39 @@
             <objects>
                 <viewController id="b3q-yk-uX7" customClass="CameraViewController" customModule="TemanNetraProgram" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ban-uw-lk8">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Pfn-Tr-aJW" customClass="CameraView" customModule="TemanNetraProgram" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="106" width="414" height="722"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y2d-M5-Q7c">
+                                <rect key="frame" x="364" y="66" width="30" height="46"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="Arsip"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qrc-Gl-0Xr">
+                                <rect key="frame" x="20" y="64" width="46" height="48"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="Panduan"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MaD-ev-ab9">
+                                <rect key="frame" x="0.0" y="852" width="414" height="30"/>
+                                <connections>
+                                    <action selector="buttonAlertSave:" destination="b3q-yk-uX7" eventType="touchUpInside" id="KHp-GM-hh6"/>
+                                </connections>
+                            </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pfn-Tr-aJW" customClass="CameraView" customModule="TemanNetraProgram" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="120" width="414" height="734"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <accessibility key="accessibilityConfiguration" label="Camera">
                                     <accessibilityTraits key="traits" button="YES" image="YES"/>
                                     <bool key="isElement" value="YES"/>
                                 </accessibility>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y2d-M5-Q7c">
-                                <rect key="frame" x="364" y="50" width="30" height="48"/>
-                                <state key="normal" image="Arsip"/>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qrc-Gl-0Xr">
-                                <rect key="frame" x="20" y="50" width="46" height="48"/>
-                                <state key="normal" image="Panduan"/>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MaD-ev-ab9">
-                                <rect key="frame" x="0.0" y="106" width="414" height="722"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <action selector="buttonAlertSave:" destination="b3q-yk-uX7" eventType="touchUpInside" id="KHp-GM-hh6"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="Pfn-Tr-aJW" firstAttribute="top" secondItem="Y2d-M5-Q7c" secondAttribute="bottom" constant="8" id="4H2-bK-N0A"/>
                             <constraint firstItem="MaD-ev-ab9" firstAttribute="trailing" secondItem="B8K-mW-rpb" secondAttribute="trailing" id="6uN-ZM-qci"/>
-                            <constraint firstItem="Y2d-M5-Q7c" firstAttribute="top" secondItem="B8K-mW-rpb" secondAttribute="top" constant="50" id="7Kt-jy-4Tu"/>
                             <constraint firstItem="MaD-ev-ab9" firstAttribute="leading" secondItem="B8K-mW-rpb" secondAttribute="leading" id="LaQ-ym-Tgb"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="Pfn-Tr-aJW" secondAttribute="bottom" constant="-20" id="So5-Xr-wDX"/>
-                            <constraint firstItem="Pfn-Tr-aJW" firstAttribute="trailing" secondItem="B8K-mW-rpb" secondAttribute="trailing" id="UPT-qN-ziK"/>
-                            <constraint firstItem="Pfn-Tr-aJW" firstAttribute="top" secondItem="qrc-Gl-0Xr" secondAttribute="bottom" constant="8" id="WPK-uc-E4r"/>
-                            <constraint firstItem="Pfn-Tr-aJW" firstAttribute="top" secondItem="Y2d-M5-Q7c" secondAttribute="bottom" constant="8" id="YmU-zD-YZb"/>
-                            <constraint firstItem="MaD-ev-ab9" firstAttribute="top" secondItem="Y2d-M5-Q7c" secondAttribute="bottom" constant="8" id="Zo4-KO-91P"/>
-                            <constraint firstItem="qrc-Gl-0Xr" firstAttribute="top" secondItem="B8K-mW-rpb" secondAttribute="top" constant="50" id="abX-Ps-dk5"/>
-                            <constraint firstItem="qrc-Gl-0Xr" firstAttribute="leading" secondItem="B8K-mW-rpb" secondAttribute="leading" constant="20" id="qYC-Rq-nrZ"/>
-                            <constraint firstItem="B8K-mW-rpb" firstAttribute="trailing" secondItem="Y2d-M5-Q7c" secondAttribute="trailing" constant="20" id="shw-hi-pFu"/>
                             <constraint firstAttribute="bottom" secondItem="MaD-ev-ab9" secondAttribute="bottom" constant="14" id="xEK-YP-MF3"/>
-                            <constraint firstItem="Pfn-Tr-aJW" firstAttribute="leading" secondItem="B8K-mW-rpb" secondAttribute="leading" id="zG0-XB-bM4"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="B8K-mW-rpb"/>
                     </view>
@@ -124,7 +116,7 @@
             <objects>
                 <tableViewController id="6lT-EU-vsZ" customClass="TableViewController" customModule="TemanNetraProgram" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="twa-yb-HeL">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
@@ -132,7 +124,7 @@
                                 <rect key="frame" x="0.0" y="28" width="414" height="55"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dh2-zM-4uI" id="XXA-Ze-Z6b">
-                                    <rect key="frame" x="0.0" y="0.0" width="382.5" height="55"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="376" height="54.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -163,11 +155,11 @@
             <objects>
                 <viewController id="UiG-UU-uou" customClass="NotesViewController" customModule="TemanNetraProgram" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="anQ-iM-CjW">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="test" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="zxo-sk-MVr">
-                                <rect key="frame" x="8" y="52" width="398" height="748"/>
+                                <rect key="frame" x="8" y="96" width="398" height="758"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -333,7 +325,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="qUC-ow-qk3" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="rXZ-vo-lg7">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

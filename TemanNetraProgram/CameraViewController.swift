@@ -91,15 +91,8 @@ class CameraViewController: UIViewController {
         
         alert.addAction(UIAlertAction(title: "Batal", style:  .cancel, handler: nil))
         self.present(alert, animated: true)
-        
-        
     }
     
-    
-    
-    
-    
-        
         func startLiveVideo() {
             cameraView.session = session
             
