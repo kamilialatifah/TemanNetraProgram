@@ -45,16 +45,11 @@ class CameraViewController: UIViewController {
             print("voice over mati")
         }
         
-        //func segue swipe
-        let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(swipeAction(swipe:)))
         
-        leftSwipe.direction = UISwipeGestureRecognizer.Direction.left
-        
-        self.view.addGestureRecognizer(leftSwipe)
-        
-        let tap = UITapGestureRecognizer(target: self, action: #selector(doubleTapped))
-        tap.numberOfTapsRequired  = 2
-        self.imageView.addGestureRecognizer(tap)
+        //double  tap
+//        let tap = UITapGestureRecognizer(target: self, action: #selector(doubleTapped))
+//        tap.numberOfTapsRequired  = 2
+//        self.imageView.addGestureRecognizer(tap)
     }
     
         override func becomeFirstResponder() -> Bool {
@@ -81,6 +76,29 @@ class CameraViewController: UIViewController {
                 synthesizer.stopSpeaking(at: .immediate)
             }
         }
+    
+    @IBAction func buttonAlertSave(_ sender: Any) {
+        
+        let alert = UIAlertController(title: "Judul Catatan", message: "Berikan judul untuk menyimpan catatan ini ke dalam Arsip", preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "Simpan", style: .default, handler: { action in
+            if let catatan  = alert.textFields?.first?.text {
+                print("ok")
+            }
+        }))
+        alert.addTextField(configurationHandler: { textField in
+            textField.placeholder = "Buat judul catatanmu"
+        })
+        
+        alert.addAction(UIAlertAction(title: "Batal", style:  .cancel, handler: nil))
+        self.present(alert, animated: true)
+        
+        
+    }
+    
+    
+    
+    
+    
         
         func startLiveVideo() {
             cameraView.session = session
@@ -386,28 +404,13 @@ extension CameraViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
     }
     
    //func untuk segue swipe
-@objc func swipeAction(swipe: UISwipeGestureRecognizer) {
-            
-    performSegue(withIdentifier: "goRight", sender: self)
-            
-        }
-    
-    @objc func doubleTapped() {
-        
-        let alert = UIAlertController(title: "Judul Catatan", message: "Berikan judul untuk menyimpan catatan ini ke dalam Arsip", preferredStyle: UIAlertController.Style.alert)
-        alert.addAction(UIAlertAction(title: "Simpan", style: .default, handler: { action in
-            if let catatan  = alert.textFields?.first?.text {
-                print("ok")
-            }
-        }))
-        alert.addTextField(configurationHandler: { textField in
-            textField.placeholder = "Buat judul catatanmu"
-        })
-        
-        alert.addAction(UIAlertAction(title: "Batal", style:  .cancel, handler: nil))
-        self.present(alert, animated: true)
-    }
-    
+
+//    
+//    @objc func doubleTapped() {
+//        
+//       
+//    }
+//    
     
 }
 
