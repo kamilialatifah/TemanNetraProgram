@@ -11,6 +11,7 @@ import AVFoundation
 import AVKit
 import Vision
 
+
 class CameraViewController: UIViewController {
 
     var counter = 0
@@ -22,6 +23,7 @@ class CameraViewController: UIViewController {
     var titikTengahDeviceX: Float = 0
     var titikTengahDeviceY: Float = 0
     var posisiSudahPas = false
+    var voiceOverCondition = UIAccessibility.isVoiceOverRunning
     
     override func viewDidLayoutSubviews() {
         imageView.layer.sublayers?[0].frame = imageView.bounds
@@ -36,6 +38,12 @@ class CameraViewController: UIViewController {
         titikTengahDeviceY = Float(imageView.frame.height/2)
         //startTextDetection()
         // Do any additional setup after loading the view.
+        if voiceOverCondition == true {
+            print("voice over nyala")
+        }
+        else {
+            print("voice over mati")
+        }
         
         //func segue swipe
         let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(swipeAction(swipe:)))
