@@ -46,7 +46,7 @@ class CameraViewController: UIViewController {
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(doubleTapped))
         tap.numberOfTapsRequired  = 2
-        view.addGestureRecognizer(tap)
+        self.imageView.addGestureRecognizer(tap)
     }
     
         override func becomeFirstResponder() -> Bool {
